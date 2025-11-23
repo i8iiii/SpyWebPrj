@@ -1,190 +1,164 @@
-// --- Phần 1: Logic cho LAN MATCH (matchingPage) ---
+// --- CẤU HÌNH & DOM ELEMENTS ---
+let socket = null;
 
+// Các phần tử DOM
+const ipInput = document.getElementById('ipInput');
+const connectBtn = document.getElementById('connectBtn');
 const statusText = document.getElementById("statusText");
 const logBox = document.getElementById("logBox");
+const adminLogBox = document.getElementById("adminLogBox");
+const nextBtn = document.getElementById("nextBtn");
+const matchingPage = document.getElementById("matchingPage");
+const menuPage = document.getElementById("menuPage");
+const backBtn = document.getElementById("backBtn");
 
-function log(msg) {
-    if (logBox) {
-        logBox.innerHTML += `<div>${msg}</div>`;
-        logBox.scrollTop = logBox.scrollHeight;
+// --- HÀM HỖ TRỢ ---
+
+// Hàm ghi log (Hợp nhất: ghi được cả log thường và log admin)
+function log(msg, isAdmin = false) {
+    const now = new Date();
+    const time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+    const line = `<div><span style="color: #888;">[${time}]</span> ${msg}</div>`;
+    
+    // 1. Luôn ghi vào log trang chủ
+    logBox.innerHTML += line;
+    logBox.scrollTop = logBox.scrollHeight;
+
+    // 2. Nếu là tin nhắn quan trọng hoặc từ Agent, ghi thêm vào log Admin
+    if (isAdmin && adminLogBox) {
+        adminLogBox.innerHTML += line;
+        adminLogBox.scrollTop = adminLogBox.scrollHeight;
     }
 }
 
-// Giả lập kết nối (bạn có thể thay bằng logic thật)
-document.getElementById("hostBtn").addEventListener("click", () => {
-    statusText.textContent = "Hosting...";
-    log("Waiting for a player to join...");
+// --- CORE LOGIC: WEBSOCKET ---
+
+function connectToWebSocket(ip) {
+    const wsUrl = `ws://${ip}:8080`;
     
-    setTimeout(() => {
-        log("Player joined successfully!");
-        onConnectionSuccessful(); 
-    }, 1000); // Giảm thời gian chờ
+    // Đóng kết nối cũ nếu có
+    if (socket) {
+        socket.close();
+    }
+
+    log(`Đang khởi tạo kết nối tới: <b>${wsUrl}</b>...`);
+    
+    try {
+        socket = new WebSocket(wsUrl);
+
+        // 1. KHI KẾT NỐI THÀNH CÔNG
+        socket.onopen = () => {
+            statusText.innerText = "Đã kết nối: " + ip;
+            statusText.style.color = "green";
+            log("✅ Socket Connected Successfully!");
+            
+            // GỬI TÍN HIỆU ĐĂNG KÝ WEB CLIENT
+            // (Server Node.js cần biết đây là Web Dashboard chứ không phải Agent)
+            socket.send("REGISTER_WEB");
+            log("📤 Sent identification: REGISTER_WEB");
+
+            // Mở khóa nút Next
+            nextBtn.disabled = false;
+            nextBtn.style.opacity = "1";
+            nextBtn.style.cursor = "pointer";
+        };
+
+        // 2. KHI NHẬN TIN NHẮN TỪ SERVER
+        socket.onmessage = (event) => {
+        const data = event.data;
+        // 2.1. Nếu là ảnh Screenshot (Giả sử C# gửi về bắt đầu bằng "IMG_BASE64:")
+        if (data.startsWith("IMG_BASE64:")) {
+            log("📸 Đã nhận được ảnh chụp màn hình!", true);
+            // Tạo popup hoặc chèn ảnh vào div để xem
+            const base64Image = data.replace("IMG_BASE64:", "");
+            // Hiển thị ảnh (Code ví dụ)
+            const imgWindow = window.open("");
+            imgWindow.document.write(`<img src="data:image/png;base64,${base64Image}" />`);
+        } 
+        // 2.2. Nếu là danh sách Process (Giả sử dữ liệu dạng JSON String)
+        else if (data.startsWith("LIST_PROC:")) {
+            const content = data.replace("LIST_PROC:", "");
+            log("📄 Danh sách tiến trình: <br>" + content, true);
+        }
+        // 2.3. Tin nhắn thường
+        else {
+            log("📥 Phản hồi từ Agent: " + data, true);
+            }
+        };
+
+        // 3. KHI MẤT KẾT NỐI
+        socket.onclose = (event) => {
+            statusText.innerText = "Mất kết nối";
+            statusText.style.color = "red";
+            log(`❌ Socket Disconnected (Code: ${event.code})`);
+            
+            // Khóa nút Next
+            nextBtn.disabled = true;
+            nextBtn.style.opacity = "0.5";
+            nextBtn.style.cursor = "not-allowed";
+        };
+
+        // 4. KHI CÓ LỖI
+        socket.onerror = (error) => {
+            log("⚠️ Socket Error. Kiểm tra lại IP hoặc Server.");
+            console.error("WebSocket Error:", error);
+        };
+
+    } catch (e) {
+        log("Lỗi khởi tạo: " + e.message);
+    }
+}
+
+// Hàm gửi lệnh sang Server -> Agent
+function sendCommand(cmd) {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send(cmd);
+        log("host@admin:~$ " + cmd, true); // Giả lập giao diện dòng lệnh
+    } else {
+        alert("Chưa kết nối tới Server! Vui lòng kiểm tra lại.");
+    }
+}
+
+// --- SỰ KIỆN (EVENT LISTENERS) ---
+
+// 1. Sự kiện nút Kết nối
+connectBtn.addEventListener('click', () => {
+    const ip = ipInput.value.trim(); 
+    
+    if (!ip) {
+        alert("Vui lòng nhập địa chỉ IP!");
+        return;
+    }
+
+    statusText.innerText = "Đang kết nối...";
+    statusText.style.color = "orange";
+
+    // Gọi hàm kết nối thật
+    connectToWebSocket(ip);
 });
 
-document.getElementById("joinBtn").addEventListener("click", () => {
-    statusText.textContent = "Searching...";
-    log("Looking for host...");
-    
-    setTimeout(() => {
-        log("Connected to host!");
-        onConnectionSuccessful(); 
-    }, 1000); // Giảm thời gian chờ
+// 2. Chuyển trang (Next & Back)
+nextBtn.addEventListener('click', () => {
+    matchingPage.style.display = 'none';
+    menuPage.style.display = 'block'; // Hiển thị dashboard
 });
 
-function onConnectionSuccessful() {
-    statusText.textContent = 'Connected! Ready to proceed.';
-    const nextBtn = document.getElementById('nextBtn'); // Lấy nút Next
-    if(nextBtn) {
-        nextBtn.disabled = false;
-        nextBtn.style.opacity = '1.0';
-        nextBtn.style.pointerEvents = 'auto';
-    }
-}
+backBtn.addEventListener('click', () => {
+    menuPage.style.display = 'none';
+    matchingPage.style.display = 'block'; // Quay lại trang kết nối
+});
 
+// 3. Các nút chức năng Admin Dashboard
+// Đảm bảo các chuỗi string (VD: 'CMD_GET_PROCESS') khớp với code C++ Agent của bạn
+document.getElementById("btnListProcess").onclick = () => sendCommand("CMD_GET_PROCESS");
+document.getElementById("btnScreenshot").onclick  = () => sendCommand("CMD_TAKE_SCREENSHOT");
+document.getElementById("btnManageApp").onclick   = () => sendCommand("CMD_GET_APPS");
+document.getElementById("btnSendCommand").onclick = () => sendCommand("PING");
 
-// --- Phần 2: Logic Điều hướng (Navigation) ---
+document.getElementById("btnRestart").onclick = () => {
+    if(confirm("CẢNH BÁO: Bạn có chắc muốn khởi động lại máy Agent?")) sendCommand("CMD_RESTART");
+};
 
-const matchingPage = document.getElementById('matchingPage');
-const menuPage = document.getElementById('menuPage');
-const nextBtn = document.getElementById('nextBtn');
-const backBtn = document.getElementById('backBtn');
-
-function showMenuPage() {
-    if (matchingPage) matchingPage.style.display = 'none';
-    if (menuPage) menuPage.style.display = 'flex'; // Dùng 'flex' để căn giữa
-}
-
-function showMatchingPage() {
-    if (matchingPage) matchingPage.style.display = 'flex'; // Dùng 'flex' để căn giữa
-    if (menuPage) menuPage.style.display = 'none';
-}
-
-if (nextBtn) nextBtn.addEventListener('click', showMenuPage);
-if (backBtn) backBtn.addEventListener('click', showMatchingPage);
-
-
-// --- Phần 3: Logic ADMIN DASHBOARD (menuPage) ---
-// Đây là phần mới, liên kết với app.py
-
-const adminLogBox = document.getElementById('adminLogBox');
-
-function adminLog(message, type = 'normal') {
-    if (!adminLogBox) return; // Kiểm tra nếu log box tồn tại
-    const pre = document.createElement('pre');
-    pre.textContent = `> ${message}`;
-    if (type === 'error') {
-        pre.style.color = '#f87171'; // Red
-    } else if (type === 'success') {
-        pre.style.color = '#4ade80'; // Green
-    } else if (type === 'info') {
-        pre.style.color = '#38bdf8'; // Blue
-    }
-    adminLogBox.appendChild(pre);
-    adminLogBox.scrollTop = adminLogBox.scrollHeight;
-}
-
-// Gắn sự kiện cho các nút admin
-const btnListProcess = document.getElementById('btnListProcess');
-if (btnListProcess) {
-    btnListProcess.addEventListener('click', async () => {
-        adminLog("Dang lay danh sach tien trinh...", 'info');
-        try {
-            const response = await fetch('/api/list_processes');
-            const data = await response.json();
-
-            if (data.success) {
-                adminLog("Lay danh sach tien trinh thanh cong!", 'success');
-                // Xóa log cũ, chỉ giữ dòng đầu
-                adminLogBox.innerHTML = '<pre>> Dang cho lenh...</pre>'; 
-                
-                // Tạo bảng
-                const table = document.createElement('table');
-                table.style.width = '100%';
-                table.innerHTML = `
-                    <thead>
-                        <tr>
-                            <th style="text-align: left; padding: 2px;">PID</th>
-                            <th style="text-align: left; padding: 2px;">Name</th>
-                        </tr>
-                    </thead>
-                `;
-                const tbody = document.createElement('tbody');
-                if (data.processes) {
-                    for (const proc of data.processes) {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td style="padding: 2px;">${proc.pid}</td>
-                            <td style="padding: 2px;">${proc.name}</td>
-                        `;
-                        tbody.appendChild(row);
-                    }
-                }
-                table.appendChild(tbody);
-                adminLogBox.appendChild(table);
-
-            } else {
-                adminLog(`LOI: ${data.error}`, 'error');
-            }
-        } catch (err) {
-            adminLog(`LOI KET NOI: ${err.message}`, 'error');
-        }
-    });
-}
-
-const btnRestart = document.getElementById('btnRestart');
-if (btnRestart) {
-    btnRestart.addEventListener('click', async () => {
-        adminLog("Dang gui lenh RESTART...", 'info');
-        try {
-            const response = await fetch('/api/restart');
-            const data = await response.json();
-            if (data.success) {
-                adminLog("Server phan hoi: " + data.message, 'success');
-            } else {
-                adminLog(`LOI: ${data.error}`, 'error');
-            }
-        } catch (err) {
-            adminLog(`LOI KET NOI: ${err.message}`, 'error');
-        }
-    });
-}
-
-const btnShutdown = document.getElementById('btnShutdown');
-if (btnShutdown) {
-    btnShutdown.addEventListener('click', async () => {
-        adminLog("Dang gui lenh SHUTDOWN...", 'info');
-        try {
-            const response = await fetch('/api/shutdown');
-            const data = await response.json();
-            if (data.success) {
-                adminLog("Server phan hoi: " + data.message, 'success');
-            } else {
-                adminLog(`LOI: ${data.error}`, 'error');
-            }
-        } catch (err) {
-            adminLog(`LOI KET NOI: ${err.message}`, 'error');
-        }
-    });
-}
-
-// Thêm sự kiện cho các nút chưa có chức năng
-const btnScreenshot = document.getElementById('btnScreenshot');
-if (btnScreenshot) {
-    btnScreenshot.addEventListener('click', () => {
-        adminLog("Chuc nang 'Take Screenshot' chua duoc cai dat.", 'info');
-    });
-}
-
-const btnManageApp = document.getElementById('btnManageApp');
-if (btnManageApp) {
-    btnManageApp.addEventListener('click', () => {
-        adminLog("Chuc nang 'Quan ly Ung dung' chua duoc cai dat.", 'info');
-    });
-}
-
-const btnSendCommand = document.getElementById('btnSendCommand');
-if (btnSendCommand) {
-    btnSendCommand.addEventListener('click', () => {
-        adminLog("Chuc nang 'Gui Lenh' chua duoc cai dat.", 'info');
-    });
-}
+document.getElementById("btnShutdown").onclick = () => {
+    if(confirm("CẢNH BÁO: Bạn có chắc muốn TẮT NGUỒN máy Agent?")) sendCommand("CMD_SHUTDOWN");
+};
