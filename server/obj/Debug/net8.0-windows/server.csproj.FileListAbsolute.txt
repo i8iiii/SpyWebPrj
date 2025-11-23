@@ -28,3 +28,18 @@ C:\Users\Nguyen Thanh Dat\Documents\Project Socket Python Spyware\SpyWebPrj\serv
 C:\Users\Nguyen Thanh Dat\Documents\Project Socket Python Spyware\SpyWebPrj\server\obj\Debug\net8.0-windows\server.pdb
 C:\Users\Nguyen Thanh Dat\Documents\Project Socket Python Spyware\SpyWebPrj\server\obj\Debug\net8.0-windows\server.genruntimeconfig.cache
 C:\Users\Nguyen Thanh Dat\Documents\Project Socket Python Spyware\SpyWebPrj\server\obj\Debug\net8.0-windows\ref\server.dll
+D:\HKIV\MMT\Project\SpyWebPrj\server\bin\Debug\net8.0-windows\server.exe
+D:\HKIV\MMT\Project\SpyWebPrj\server\bin\Debug\net8.0-windows\server.deps.json
+D:\HKIV\MMT\Project\SpyWebPrj\server\bin\Debug\net8.0-windows\server.runtimeconfig.json
+D:\HKIV\MMT\Project\SpyWebPrj\server\bin\Debug\net8.0-windows\server.dll
+D:\HKIV\MMT\Project\SpyWebPrj\server\bin\Debug\net8.0-windows\server.pdb
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\server.GeneratedMSBuildEditorConfig.editorconfig
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\server.AssemblyInfoInputs.cache
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\server.AssemblyInfo.cs
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\server.csproj.CoreCompileInputs.cache
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\server.sourcelink.json
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\server.dll
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\refint\server.dll
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\server.pdb
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\server.genruntimeconfig.cache
+D:\HKIV\MMT\Project\SpyWebPrj\server\obj\Debug\net8.0-windows\ref\server.dll

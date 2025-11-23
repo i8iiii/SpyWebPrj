@@ -17,7 +17,7 @@ namespace WindowsAgent
         private TextBox logBox;
         private Label ipLabel; // Label để hiển thị IP
         private ClientWebSocket ws;
-        
+
         // Khai báo Feature class
         private Feature _featureLogic;
 
@@ -31,38 +31,50 @@ namespace WindowsAgent
             this.BackColor = Color.WhiteSmoke;
 
             // --- 2. HIỂN THỊ IP MÁY HIỆN TẠI ---
+            // --- 2. HIỂN THỊ IP MÁY HIỆN TẠI ---
+            // --- 2. HIỂN THỊ IP MÁY HIỆN TẠI ---
             string myIP = GetLocalIPAddress();
 
-            ipLabel = new Label();
-            ipLabel.Text = "My IP Address: " + myIP;
-            ipLabel.Font = new Font("Consolas", 12, FontStyle.Bold);
-            ipLabel.ForeColor = Color.DarkRed;
-            ipLabel.AutoSize = true;
-            ipLabel.Top = 15;
-            // Căn giữa Label IP
-            ipLabel.Left = (this.ClientSize.Width - 250) / 2; 
-            this.Controls.Add(ipLabel);
+            // Thay Label bằng TextBox
+            TextBox ipBox = new TextBox();
+            ipBox.Text = myIP; // Chỉ hiện IP cho dễ copy
+            ipBox.Font = new Font("Consolas", 12, FontStyle.Bold);
+            ipBox.ForeColor = Color.DarkRed;
+            ipBox.BackColor = this.BackColor; // Màu nền trùng màu Form
+            ipBox.BorderStyle = BorderStyle.None; // Bỏ viền khung
+            ipBox.ReadOnly = true; // Chỉ đọc, không cho sửa
+            ipBox.TextAlign = HorizontalAlignment.Center; // Căn giữa chữ
+            ipBox.Width = 250; // Cần set chiều rộng vì TextBox không có AutoSize
+            ipBox.Top = 15;
+            ipBox.Left = (this.ClientSize.Width - ipBox.Width) / 2;
+
+            // Mẹo: Khi click vào thì tự động chọn hết toàn bộ text để copy cho nhanh
+            ipBox.Click += (s, e) => ipBox.SelectAll();
+
+            this.Controls.Add(ipBox);
+
+            // Nếu muốn vẫn giữ dòng chữ "My IP Address:" thì tạo thêm 1 Label nhỏ bên cạnh hoặc nối chuỗi vào TextBox tùy bạn.
 
             // --- 3. NÚT KẾT NỐI ---
             openServerButton = new Button();
-            openServerButton.Text = "KẾT NỐI GATEWAY"; 
+            openServerButton.Text = "KẾT NỐI GATEWAY";
             openServerButton.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             openServerButton.BackColor = Color.FromArgb(52, 152, 219);
             openServerButton.ForeColor = Color.White;
             openServerButton.FlatStyle = FlatStyle.Flat;
-            openServerButton.Width = 200; 
+            openServerButton.Width = 200;
             openServerButton.Height = 50;
             openServerButton.Left = (this.ClientSize.Width - openServerButton.Width) / 2;
             openServerButton.Top = 50;
 
             // Bo tròn nút
-             openServerButton.Region = Region.FromHrgn(
-                CreateRoundRectRgn(0, 0, openServerButton.Width, openServerButton.Height, 20, 20)
-            );
+            openServerButton.Region = Region.FromHrgn(
+               CreateRoundRectRgn(0, 0, openServerButton.Width, openServerButton.Height, 20, 20)
+           );
 
             openServerButton.Click += async (s, e) =>
             {
-                openServerButton.Enabled = false; 
+                openServerButton.Enabled = false;
                 openServerButton.Text = "Đang kết nối...";
                 openServerButton.BackColor = Color.Gray;
                 await ConnectToGatewayAsync();
@@ -115,14 +127,14 @@ namespace WindowsAgent
             try
             {
                 ws = new ClientWebSocket();
-                
+
                 // LƯU Ý: Nếu Gateway chạy ở máy khác, hãy nhập IP của máy chạy Node.js vào đây
                 // Ví dụ: ws://192.168.1.15:8080
-                var gatewayUri = new Uri("ws://127.0.0.1:8080"); 
-                
+                var gatewayUri = new Uri("ws://127.0.0.1:8080");
+
                 UpdateLog("⏳ Đang tìm Gateway tại " + gatewayUri + "...");
                 await ws.ConnectAsync(gatewayUri, CancellationToken.None);
-                
+
                 UpdateLog("✅ Đã kết nối thành công!");
                 openServerButton.Text = "ĐÃ KẾT NỐI";
                 openServerButton.BackColor = Color.Green;
@@ -148,13 +160,13 @@ namespace WindowsAgent
         private async Task ListenLoop()
         {
             var buffer = new byte[1024 * 1024 * 2]; // Buffer 2MB (để chứa ảnh nếu cần nhận)
-            
+
             while (ws.State == WebSocketState.Open)
             {
                 try
                 {
                     var result = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-                    
+
                     if (result.MessageType == WebSocketMessageType.Close)
                     {
                         await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
