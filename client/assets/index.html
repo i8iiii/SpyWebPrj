@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LAN Match</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="matchingPage" id="matchingPage">
+    <div class="lan-match-card">
+      <h1>LAN Match</h1>
+      <p class="desc">Connect two PCs on the same LAN. One hosts, one joins.</p>
+
+      <div class="buttons">
+        <button id="hostBtn">Host</button>
+        <button id="joinBtn">Join</button>
+      </div>
+
+      <div class="status">
+        Status: <span id="statusText">Idle</span>
+      </div>
+
+      <div class="log" id="logBox"></div>
+
+      <button id="nextBtn" class="primary-btn" disabled style="opacity: 0.5; margin-top: 15px;">Next</button>
+    </div>
+  </div>
+
+  <div class="menuPage" id="menuPage">
+    <div class="admin-container" id="adminDashboard">
+      <!-- CỘT BÊN TRÁI: 6 NÚT CHỨC NĂNG -->
+      <div class="button-panel">
+        <h1>Bảng điều khiển</h1>
+
+        <div class="button-grid">
+          <!-- Hàng 1 -->
+          <!-- CẬP NHẬT: Thêm ID cho các nút -->
+          <button id="btnListProcess">List Processes</button>
+          <button id="btnScreenshot">Take Screenshot</button>
+          <!-- Hàng 2 -->
+          <button id="btnManageApp">Quản lý Ứng dụng</button>
+          <button id="btnSendCommand">Gửi Lệnh</button>
+          <!-- Hàng 3 -->
+          <button id="btnRestart" class="btn-restart">Restart Agent</button>
+          <button id="btnShutdown" class="btn-shutdown">Shutdown Agent</button>
+        </div>
+
+        <!-- Nút điều hướng MỚI -->
+        <button id="backBtn" class="btn-back">Back</button>
+      </div>
+
+      <!-- CỘT BÊN PHẢI: BẢNG LOG OUTPUT -->
+      <div class="log-panel">
+        <h2>Nhật ký (Log)</h2>
+        <!-- CẬP NHẬT: Thêm ID cho log admin -->
+        <div class="log" id="adminLogBox">
+          <pre>> Khởi tạo hệ thống...</pre>
+          <pre style="color: #38bdf8;">> Đang chờ lệnh...</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tải 2 file JS ở cuối -->
+  <script src="js/themebutton.js"></script>
+  <script src="js/matching.js"></script>
+</body>
+
+</html>
