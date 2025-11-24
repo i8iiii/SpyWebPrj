@@ -6,58 +6,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LAN Match</title>
   <link rel="stylesheet" href="css/style.css" />
+
+  <script>
+    function goToMenuPage() {
+      document.getElementById('matchingPage').style.display = 'none';
+      document.getElementById('menuPage').style.display = 'block';
+    }
+
+    function goToMatchingPage() {
+      document.getElementById('menuPage').style.display = 'none';
+      document.getElementById('matchingPage').style.display = 'flex';
+    }
+  </script>
 </head>
 
 <body>
+  <!-- Initial Page -->
   <div class="matchingPage" id="matchingPage">
     <div class="lan-match-card">
-  <h1>Hệ Thống Giám Sát</h1>
-  <p class="desc">Kết nối tới WebSocket Gateway.</p>
+      <h1>Hệ Thống Giám Sát</h1>
+      <p class="desc">Kết nối tới WebSocket Gateway.</p>
 
-  <div class="connection-box" style="margin: 20px 0; display: flex; gap: 10px; justify-content: center;">
-    <input 
-      type="text" 
-      id="ipInput" 
-      placeholder="Nhập IP (vd: 192.168.1.5)" 
-      value="127.0.0.1" 
-      style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 200px;"
-    />
-    <button id="connectBtn" style="white-space: nowrap;">Kết nối IP</button>
+      <div class="connection-box">
+        <input type="text" id="ipInput" placeholder="Enter IP" />
+        <button id="connectBtn" onclick="connectButtonClicked()">Connect</button>
+      </div>
+
+      <div class="status">
+        Trạng thái:<span id="statusText">Chưa kết nối</span>
+      </div>
+
+      <div class="log" id="logBox"> <!-- Javascript here --> </div>
+
+      <button id="nextBtn" class="primary-btn" onclick="goToMenuPage()" disabled>Vào Bảng Điều Khiển</button>
+    </div>
   </div>
 
-  <div class="status">
-    Trạng thái: <span id="statusText" style="font-weight: bold; color: red;">Chưa kết nối</span>
-  </div>
-
-  <div class="log" id="logBox" style="height: 100px;"></div>
-
-  <button id="nextBtn" class="primary-btn" disabled style="opacity: 0.5; margin-top: 15px;">Vào Bảng Điều Khiển</button>
-</div>
-  </div>
-
+  <!-- After Clicked 'Connect' -->
   <div class="menuPage" id="menuPage">
     <div class="admin-container" id="adminDashboard">
       <div class="button-panel">
         <h1>Bảng điều khiển</h1>
 
         <div class="button-grid">
-          <button id="btnListProcess">List Processes</button>
-          <button id="btnScreenshot">Take Screenshot</button>
-          
-          <button id="btnManageApp">List Apps</button>
-          <button id="btnSendCommand">Test Ping</button>
-          
-          <button id="btnRestart" class="btn-restart">Restart Agent</button>
-          <button id="btnShutdown" class="btn-shutdown">Shutdown Agent</button>
+          <button id="btnListProcess" onclick="getProcessCmd()">List Processes</button>
+          <button id="btnScreenshot" onclick="getScreenshotCmd()">Take Screenshot</button>
+
+          <button id="btnManageApp" onclick="getAppsCmd()">List Apps</button>
+          <button id="btnSendCommand" onclick="getPingCmd()">Test Ping</button>
+          <button id="btnRestart" class="btn-restart" onclick="restartCmd()">Restart Agent</button>
+          <button id="btnShutdown" class="btn-shutdown" onclick="shutdownCmd()">Shutdown Agent</button>
         </div>
 
-        <button id="backBtn" class="btn-back" style="margin-top: 20px;">Quay lại</button>
+        <button id="backBtn" class="btn-back" onclick="goToMatchingPage()">Quay lại</button>
       </div>
 
       <div class="log-panel">
         <h2>Dữ liệu từ Agent</h2>
-        <div id="imageContainer" style="margin-bottom: 10px; text-align: center; display: none;">
-             <img id="monitorScreen" src="" style="max-width: 100%; border: 2px solid #00ff00; border-radius: 5px;">
+        <div id="imageContainer">
+          <img id="monitorScreen">
         </div>
         <div class="log" id="adminLogBox">
           <div>> Hệ thống sẵn sàng...</div>
@@ -65,6 +72,10 @@
       </div>
     </div>
   </div>
-  </body>
-  <script src="js/matching.js"></script>
+</body>
+
+<script src="js/matching.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/log.js"></script>
+
 </html>

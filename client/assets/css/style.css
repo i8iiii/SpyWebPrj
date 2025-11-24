@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 
 /* --- CSS NỀN TẢNG (Nền tối) --- */
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: radial-gradient(circle at center, #0f172a, #020617);
   color: #e2e8f0;
   height: 100vh;
@@ -35,7 +35,9 @@ button:hover {
 }
 
 /* Style cho tiêu đề */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 24px;
@@ -49,14 +51,21 @@ p.desc {
 }
 
 /* --- MÀN HÌNH 1: LAN MATCH PAGE --- */
-#matchingPage {
-  display: flex; /* Mặc định hiển thị, và căn giữa */
+.matchingPage {
+  position: relative;
+  display: flex;
   justify-content: center;
   align-items: center;
+  height: auto;
   width: 100%;
 }
 
 .lan-match-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
@@ -106,7 +115,7 @@ p.desc {
 /* --- MÀN HÌNH 2: ADMIN DASHBOARD --- */
 #menuPage {
   display: none; /* Mặc định ẩn */
-  
+
   /* Căn giữa .admin-container bên trong nó */
   justify-content: center;
   align-items: center;
@@ -138,7 +147,7 @@ p.desc {
 
 .button-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 16px;
 }
 
@@ -180,4 +189,55 @@ p.desc {
 }
 .btn-back:hover {
   background-color: #1f2937 !important;
+}
+
+.connection-box {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.connection-box input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+  font-size: 1rem;
+}
+
+.connection-box #connectBtn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.log {
+  height: 100px;
+}
+
+.button .primary-btn {
+  opacity: 0.5;
+  margin-top: 15px;
+}
+
+.button .btn-back {
+  margin-top: 15px;
+}
+
+#imageContainer {
+  margin-bottom: 10px;
+  text-align: center;
+  display: none;
+}
+
+#minitorScreen {
+  max-width: 100%;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+}
+
+#statusText {
+  font-weight: bold;
+  color: red;
 }
