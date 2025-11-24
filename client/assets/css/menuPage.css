@@ -1,0 +1,94 @@
+/* --- MÀN HÌNH 2: ADMIN DASHBOARD --- */
+#menuPage {
+  display: none; /* Mặc định ẩn */
+  /* Căn giữa .admin-container bên trong nó */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 95vw;
+}
+
+.admin-container {
+  display: flex;
+  gap: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button-panel {
+  flex: 1; /* Cột nút chiếm 1 phần */
+}
+
+.log-panel {
+  flex: 3; /* Cột log chiếm 3 phần (rộng hơn) */
+  display: flex;
+  flex-direction: column;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+}
+
+/* Log to bên phải */
+.log-panel .log {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  overflow-y: auto;
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  flex-grow: 1; /* Co giãn theo chiều cao */
+  min-height: 400px; /* Chiều cao tối thiểu */
+}
+
+/* --- Style cho các nút đặc biệt --- */
+.btn-restart {
+  background-color: #ca8a04 !important;
+  color: #fff !important;
+}
+.btn-restart:hover {
+  background-color: #a16207 !important;
+}
+
+.btn-shutdown {
+  background-color: #dc2626 !important;
+  color: #fff !important;
+}
+.btn-shutdown:hover {
+  background-color: #b91c1c !important;
+}
+
+.btn-back {
+  background-color: #374151 !important; /* Màu xám */
+  margin-top: 16px;
+  width: 100%;
+}
+.btn-back:hover {
+  background-color: #1f2937 !important;
+}
+
+.button .btn-back {
+  margin-top: 15px; /* Một style khác cho nút back */
+}
+
+/* Container chứa ảnh screenshot */
+#imageContainer {
+  margin-bottom: 10px;
+  text-align: center;
+  display: none;
+}
+
+#minitorScreen {
+  max-width: 100%;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+}

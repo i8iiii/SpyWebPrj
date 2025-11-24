@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 
-/* --- CSS NỀN TẢNG (Nền tối) --- */
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -14,9 +13,22 @@ body {
   box-sizing: border-box;
 }
 
-/* Style chung cho các nút bấm */
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #e2e8f0;
+}
+p.desc {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
 button {
-  background: #3b82f6; /* Màu xanh dương */
+  background: #3b82f6;
   border: none;
   color: #fff;
   padding: 10px 24px;
@@ -27,217 +39,12 @@ button {
   transition: background 0.25s ease;
   text-align: center;
   line-height: 1.5;
-  white-space: nowrap; /* Ngăn nút vỡ dòng */
+  white-space: nowrap;
 }
-
 button:hover {
   background: #2563eb;
 }
 
-/* Style cho tiêu đề */
-h1,
-h2,
-h3 {
-  font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 24px;
-  color: #e2e8f0;
-}
-
-p.desc {
-  color: #94a3b8;
-  font-size: 0.9rem;
-  margin-bottom: 24px;
-}
-
-/* --- MÀN HÌNH 1: LAN MATCH PAGE --- */
-.matchingPage {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  width: 100%;
-}
-
-.lan-match-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  width: 360px;
-  text-align: center;
-}
-
-/* Các nút Host/Join */
-.lan-match-card .buttons {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.lan-match-card .status {
-  font-size: 0.95rem;
-  margin-bottom: 10px;
-}
-
-.lan-match-card #statusText {
-  font-weight: bold;
-  color: #38bdf8; /* Màu xanh sáng */
-}
-
-/* Log nhỏ trong card LAN Match */
-.lan-match-card .log {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  height: 120px;
-  overflow-y: auto;
-  text-align: left;
-  padding: 8px;
-  font-size: 0.85rem;
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  margin-bottom: 24px;
-}
-
-/* Nút Next ở màn hình 1 */
-#nextBtn {
-  margin-top: 15px;
-  width: 100%;
-}
-
-/* --- MÀN HÌNH 2: ADMIN DASHBOARD --- */
-#menuPage {
-  display: none; /* Mặc định ẩn */
-
-  /* Căn giữa .admin-container bên trong nó */
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 95vw;
-}
-
-.admin-container {
-  display: flex;
-  gap: 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  box-sizing: border-box; /* Quan trọng */
-}
-
-.button-panel {
-  flex: 1; /* Cột nút chiếm 1 phần */
-}
-
-.log-panel {
-  flex: 3; /* Cột log chiếm 3 phần (rộng hơn) */
-  display: flex;
-  flex-direction: column;
-}
-
-.button-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 16px;
-}
-
-/* Log to bên phải */
-.log-panel .log {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  overflow-y: auto;
-  text-align: left;
-  padding: 12px 16px;
-  font-size: 0.85rem;
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  flex-grow: 1; /* Co giãn theo chiều cao */
-  min-height: 400px; /* Chiều cao tối thiểu */
-}
-
-/* --- Style cho các nút đặc biệt --- */
-.btn-restart {
-  background-color: #ca8a04 !important;
-  color: #fff !important;
-}
-.btn-restart:hover {
-  background-color: #a16207 !important;
-}
-
-.btn-shutdown {
-  background-color: #dc2626 !important;
-  color: #fff !important;
-}
-.btn-shutdown:hover {
-  background-color: #b91c1c !important;
-}
-
-.btn-back {
-  background-color: #374151 !important; /* Màu xám */
-  margin-top: 16px;
-  width: 100%;
-}
-.btn-back:hover {
-  background-color: #1f2937 !important;
-}
-
-.connection-box {
-  margin: 20px 0;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.connection-box input {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 200px;
-  font-size: 1rem;
-}
-
-.connection-box #connectBtn {
-  padding: 10px 20px;
-  font-size: 1rem;
-  white-space: nowrap;
-}
-
 .log {
-  height: 100px;
-}
-
-.button .primary-btn {
-  opacity: 0.5;
-  margin-top: 15px;
-}
-
-.button .btn-back {
-  margin-top: 15px;
-}
-
-#imageContainer {
-  margin-bottom: 10px;
-  text-align: center;
-  display: none;
-}
-
-#minitorScreen {
-  max-width: 100%;
-  border: 2px solid #00ff00;
-  border-radius: 5px;
-}
-
-#statusText {
-  font-weight: bold;
-  color: red;
+  height: 100px; /* Chiều cao cơ bản */
 }

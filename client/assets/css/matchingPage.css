@@ -1,0 +1,86 @@
+/* --- MÀN HÌNH 1: LAN MATCH PAGE --- */
+.matchingPage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+}
+
+.lan-match-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  width: 360px;
+  text-align: center;
+}
+
+/* Connection Box */
+.connection-box {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.connection-box input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+  font-size: 1rem;
+}
+
+.connection-box #connectBtn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+/* Trạng thái */
+.lan-match-card .status {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.lan-match-card #statusText {
+  font-weight: bold;
+  color: #38bdf8; /* Màu xanh sáng */
+}
+
+#statusText {
+  font-weight: bold;
+  color: red; /* Override sau khi kết nối thất bại? */
+}
+
+/* Log nhỏ trong card LAN Match */
+.lan-match-card .log {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  height: 120px;
+  overflow-y: auto;
+  text-align: left;
+  padding: 8px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 24px;
+}
+
+/* Nút Next ở màn hình 1 */
+#nextBtn {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.button .primary-btn {
+  opacity: 0.5;
+  margin-top: 15px;
+}
