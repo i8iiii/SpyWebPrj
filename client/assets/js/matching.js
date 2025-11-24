@@ -151,9 +151,9 @@ backBtn.addEventListener('click', () => {
 // 3. Các nút chức năng Admin Dashboard
 // Đảm bảo các chuỗi string (VD: 'CMD_GET_PROCESS') khớp với code C++ Agent của bạn
 document.getElementById("btnListProcess").onclick = () => sendCommand("CMD_GET_PROCESS");
-document.getElementById("btnScreenshot").onclick  = () => sendCommand("CMD_TAKE_SCREENSHOT");
+document.getElementById("btnScreenshot").onclick  = () => sendCommand("CMD_SCREENSHOT");
 document.getElementById("btnManageApp").onclick   = () => sendCommand("CMD_GET_APPS");
-document.getElementById("btnSendCommand").onclick = () => sendCommand("PING");
+document.getElementById("btnSendCommand").onclick = () => sendCommand("CMD_PING");
 
 document.getElementById("btnRestart").onclick = () => {
     if(confirm("CẢNH BÁO: Bạn có chắc muốn khởi động lại máy Agent?")) sendCommand("CMD_RESTART");

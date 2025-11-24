@@ -157,9 +157,11 @@ namespace WindowsAgent
         }
 
         // --- VÒNG LẶP LẮNG NGHE LỆNH ---
+        // --- Thay thế toàn bộ hàm ListenLoop cũ bằng hàm này ---
         private async Task ListenLoop()
         {
-            var buffer = new byte[1024 * 1024 * 2]; // Buffer 2MB (để chứa ảnh nếu cần nhận)
+            // Tăng buffer lên 4MB cho chắc chắn
+            var buffer = new byte[1024 * 1024 * 4];
 
             while (ws.State == WebSocketState.Open)
             {
@@ -174,23 +176,41 @@ namespace WindowsAgent
                         break;
                     }
 
-                    string receivedCmd = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    UpdateLog("⬅️ Server ra lệnh: " + receivedCmd);
+                    // 1. Lọc sạch ký tự Null và khoảng trắng
+                    string receivedCmd = Encoding.UTF8.GetString(buffer, 0, result.Count).Trim().Replace("\0", "");
 
-                    // === XỬ LÝ LỆNH VÀ TRẢ KẾT QUẢ ===
-                    // Gọi class Feature để thực hiện
-                    string responseData = _featureLogic.ProcessCommand(receivedCmd);
+                    // UpdateLog("⬅️ Server: " + receivedCmd); // (Tùy chọn: bỏ comment để debug)
 
+                    // 2. QUAN TRỌNG: Chạy xử lý lệnh trên UI Thread (Main Thread)
+                    // Để hàm chụp màn hình (TakeScreenshot) có thể truy cập được Graphics màn hình
+                    string responseData = "";
+
+                    this.Invoke(new Action(() =>
+                    {
+                        // Gọi Logic xử lý
+                        responseData = _featureLogic.ProcessCommand(receivedCmd);
+                    }));
+
+                    // 3. Gửi phản hồi (nếu có)
                     if (!string.IsNullOrEmpty(responseData))
                     {
                         byte[] sendBytes = Encoding.UTF8.GetBytes(responseData);
                         await ws.SendAsync(new ArraySegment<byte>(sendBytes), WebSocketMessageType.Text, true, CancellationToken.None);
-                        UpdateLog("➡️ Đã gửi kết quả (" + sendBytes.Length + " bytes)");
+
+                        // Chỉ log nếu không phải là ảnh (để đỡ spam log)
+                        if (!responseData.StartsWith("IMG_BASE64"))
+                        {
+                            UpdateLog("➡️ Đã gửi trả lời: " + responseData);
+                        }
+                        else
+                        {
+                            UpdateLog("📸 Đã gửi dữ liệu ảnh Screenshot.");
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    UpdateLog("❌ Lỗi khi đang lắng nghe: " + ex.Message);
+                    UpdateLog("❌ Lỗi luồng lắng nghe: " + ex.Message);
                     break;
                 }
             }

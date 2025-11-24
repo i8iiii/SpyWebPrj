@@ -17,6 +17,14 @@ namespace WindowsAgent
             {
                 switch (cmd)
                 {
+
+                    // ... các case cũ ...
+
+                    // THÊM ĐOẠN NÀY:
+                    case "REGISTERED_OK":
+                        // Server xác nhận kết nối, Agent không cần làm gì, trả về rỗng để không gửi lại gì cả
+                        return "";
+                        
                     case "CMD_PING":
                         return "PONG: Agent hoạt động tốt! Time: " + DateTime.Now.ToString();
 
