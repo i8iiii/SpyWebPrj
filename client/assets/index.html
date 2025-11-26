@@ -47,14 +47,15 @@
   <!-- After Clicked 'Connect' -->
   <div class="menuPage" id="menuPage">
     <div class="admin-container" id="adminDashboard">
+      <!-- MAIN BUTTON PANEL -->
       <div class="button-panel">
         <h1>Bảng điều khiển</h1>
 
         <div class="button-grid">
-          <button onclick="getProcessCmd()">List Processes</button>
+          <button onclick="getProcessCmd(); toggleListProcessPanel()">List Processes</button>
           <button onclick="getScreenshotCmd()">Take Screenshot</button>
 
-          <button onclick="getAppsCmd()">List Apps</button>
+          <button onclick="getAppsCmd(); toggleListAppPanel()">List Apps</button>
           <button onclick="getPingCmd()">Test Ping</button>
 
           <div style="display: flex; gap: 3px;">
@@ -73,6 +74,30 @@
         </div>
 
         <button id="backBtn" class="btn-back" onclick="goToMatchingPage()">Quay lại</button>
+      </div>
+
+      <!-- WHEN PROCESS BTN IS CLICKED -->
+      <div class="list-process-panel">
+        <h1>Danh sách tiến trình</h1>
+
+        <input id="process-id-input" type="text" placeholder="Enter ID" />
+
+        <button onclick="killProcess()"> Kill Process</button>
+
+        <button onclick="toggleListProcessPanel()">戻れる</button>
+
+      </div>
+
+      <!-- WHEN APPS BTN IS CLICKED -->
+      <div class="list-app-panel">
+        <h1>Danh sách ứng dụng</h1>
+
+        <input id="app-id-input" type="text" placeholder="Enter ID" />
+
+        <button onclick="startApp()"> Start </button>
+        <button onclick="closeApp()"> Close </button>
+
+        <button onclick="toggleListAppPanel()">戻れる</button>
       </div>
 
       <div class="log-panel">

@@ -20,12 +20,21 @@
   box-sizing: border-box;
 }
 
+.list-app-panel,
+.list-process-panel,
 .button-panel {
-  flex: 1; /* Cột nút chiếm 1 phần */
+  flex: 1;
+}
+
+.list-app-panel,
+.list-process-panel {
+  display: none; /* Ẩn mặc định */
+  flex-direction: column;
+  gap: 20px;
 }
 
 .log-panel {
-  flex: 3; /* Cột log chiếm 3 phần (rộng hơn) */
+  flex: 3;
   display: flex;
   flex-direction: column;
 }
@@ -106,4 +115,22 @@ button:has(span[data-state="on"]) {
 button:has(span[data-state="off"]) {
   background-color: #6C757D; 
   font-weight: 600;
+}
+
+#app-id-input,
+#process-id-input,
+#webcam-duration {
+  width: 75px;
+  padding: 8px;
+  border-radius: 8px;
+
+  background-color: #d2dbe7;
+}
+
+#app-id-input,
+#process-id-input {
+  width: 90%;
+  height: auto;
+
+  box-sizing: border-box;
 }

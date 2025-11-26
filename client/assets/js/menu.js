@@ -24,6 +24,43 @@ function getPingCmd() {
   sendCommand("CMD_PING");
 }
 
+function restartCmd() {
+  if (confirm("CẢNH BÁO: Bạn có chắc muốn khởi động lại máy Agent?"))
+    sendCommand("CMD_RESTART");
+}
+
+function shutdownCmd() {
+  if (confirm("CẢNH BÁO: Bạn có chắc muốn TẮT NGUỒN máy Agent?"))
+    sendCommand("CMD_SHUTDOWN");
+}
+
+
+
+
+function toggleListAppPanel() {
+  const panel = document.querySelector(".list-app-panel");
+  const mainPanel = document.querySelector(".button-panel");
+  if (panel.style.display === "none" || panel.style.display === "") {
+    panel.style.display = "flex";
+    mainPanel.style.display = "none";
+  } else {
+    panel.style.display = "none";
+    mainPanel.style.display = "block";
+  }
+}
+
+function toggleListProcessPanel() {
+  const mainPanel = document.querySelector(".button-panel");
+  const panel = document.querySelector(".list-process-panel");
+  if (panel.style.display === "none" || panel.style.display === "") {
+    panel.style.display = "flex";
+    mainPanel.style.display = "none";
+  } else {
+    panel.style.display = "none";
+    mainPanel.style.display = "block";
+  }
+}
+
 function getKeyLog() {
   const command = document.getElementById("keylog-cmd");
   if (command.dataset.state.trim().toLowerCase() === "off") {
@@ -70,12 +107,14 @@ function toggleWebcam() {
   }
 }
 
-function restartCmd() {
-  if (confirm("CẢNH BÁO: Bạn có chắc muốn khởi động lại máy Agent?"))
-    sendCommand("CMD_RESTART");
+function killProcess() {
+
 }
 
-function shutdownCmd() {
-  if (confirm("CẢNH BÁO: Bạn có chắc muốn TẮT NGUỒN máy Agent?"))
-    sendCommand("CMD_SHUTDOWN");
+function startApp() {
+
+}
+
+function closeApp() {
+  
 }
