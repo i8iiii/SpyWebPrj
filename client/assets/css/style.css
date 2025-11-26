@@ -48,3 +48,11 @@ button:hover {
 .log {
   height: 100px; /* Chiều cao cơ bản */
 }
+
+#webcam-duration {
+  width: 75px;
+  padding: 8px;
+  border-radius: 8px;
+
+  background-color: #d2dbe7;
+}

@@ -28,18 +28,25 @@ function getKeyLog() {
   const command = document.getElementById("keylog-cmd");
   if (command.dataset.state.trim().toLowerCase() === "off") {
     // Keylog is OFF → ask to turn ON
+    // TODO: START KEY LOGGING
     sendCommand("PLACE HOLDER 1");
     command.dataset.state = "on";
-    command.textContent = "Stop"; // show "Stop" because keylog is now ON
+    command.textContent = "Stop"; 
   } else {
+    // TODO: STOP KEY LOGGING
     sendCommand("PLACE HOLDER 2");
     command.dataset.state = "off";
-    command.textContent = "Start"; // show "Start" because keylog is now OFF
+    command.textContent = "Start";
   }
 }
 
+// TODO:
+// CMD_CAM_ON_<<DURATION>>
+// CMD_CAM_OFF
 function toggleWebcam() {
   const command = document.getElementById("webcam-cmd");
+  const durationInput = document.getElementById("webcam-duration");
+  const duration = parseInt(durationInput.value, 10);
 
   // Webcam is ON when the text says "Off"
   const webcamIsOn = command.dataset.state.trim().toLowerCase() === "on";
@@ -47,15 +54,19 @@ function toggleWebcam() {
   if (!webcamIsOn) {
     // Webcam is OFF → ask to turn ON
     if (confirm("CẢNH BÁO: Bạn có muốn mở camera?")) {
-      sendCommand("CMD_CAM_ON");
+      sendCommand(`CMD_CAM_ON_${isNaN(duration) ? 10 : duration}`);
+      // IF DURATION IS 10 (seconds) CMD = CMD_CAM_ON_10
       command.dataset.state = "on";
       command.textContent = "Off"; // show "Off" because webcam is now ON
+      durationInput.disabled = true;
     }
   } else {
     // Webcam is ON → turn OFF
     sendCommand("CMD_CAM_OFF");
+    durationInput.value = "";
     command.dataset.state = "off";
     command.textContent = "On"; // show "On" because webcam is now OFF
+    durationInput.disabled = false;
   }
 }
 
