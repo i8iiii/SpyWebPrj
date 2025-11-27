@@ -1,18 +1,20 @@
 // ================================================
-// WebSocket Gateway (Node.js)
-// ================================================
-// Nhiệm vụ của Gateway:
-// - Nhận kết nối từ Web Client (index.html)
-// - Nhận kết nối từ C++ Agent (server.exe)
-// - Chuyển tiếp lệnh qua lại
-// - Không xử lý logic bên trong
+// WebSocket Gateway (Node.js) - High Performance
 // ================================================
 
 const WebSocket = require("ws");
 
-// Tạo websocket server
-const wss = new WebSocket.Server({ port: 8080 });
-console.log("🔌 WebSocket Gateway running at ws://localhost:8080");
+// Cấu hình giới hạn Max Payload (1GB) để tránh lỗi RangeError
+const MAX_PAYLOAD = 1024 * 1024 * 1024 * 1024; 
+
+// Tạo websocket server với cấu hình nâng cao
+const wss = new WebSocket.Server({ 
+    port: 8080,
+    maxPayload: MAX_PAYLOAD 
+});
+
+console.log(`🔌 WebSocket Gateway running at ws://localhost:8080`);
+console.log(`🚀 Max Payload Size: ${MAX_PAYLOAD / 1024 / 1024} MB`);
 
 let clients = {
     web: null,
@@ -20,11 +22,21 @@ let clients = {
 };
 
 wss.on("connection", (ws, req) => {
-    console.log("🔗 New connection:", req.socket.remoteAddress);
+    const ip = req.socket.remoteAddress;
+    console.log(`🔗 New connection from: ${ip}`);
 
     ws.on("message", (raw) => {
+        // Chuyển raw buffer sang string (Cẩn thận với file quá lớn có thể gây chậm ở bước này)
+        // Với file video, ta không nên log toàn bộ nội dung ra console vì sẽ treo terminal
         const msg = raw.toString();
-        console.log("📩 MSG:", msg);
+        
+        // Log thông minh: Nếu tin nhắn quá dài (video/ảnh), chỉ log kích thước
+        if (msg.length > 200) {
+            const preview = msg.substring(0, 50) + "...";
+            console.log(`📩 MSG (${(msg.length / 1024).toFixed(2)} KB): ${preview}`);
+        } else {
+            console.log("📩 MSG:", msg);
+        }
 
         // ===== REGISTER WEB CLIENT =====
         if (msg === "REGISTER_WEB") {
@@ -45,7 +57,7 @@ wss.on("connection", (ws, req) => {
         // ===== WEB → AGENT =====
         if (ws === clients.web) {
             if (clients.agent) {
-                console.log("➡️ Forwarding WEB → AGENT:", msg);
+                // console.log("➡️ Forwarding WEB → AGENT"); // Uncomment nếu muốn debug kỹ
                 clients.agent.send(msg);
             } else {
                 ws.send("SERVER: Agent not connected");
@@ -56,11 +68,15 @@ wss.on("connection", (ws, req) => {
         // ===== AGENT → WEB =====
         if (ws === clients.agent) {
             if (clients.web) {
-                console.log("⬅️ Forwarding AGENT → WEB:", msg);
+                console.log("⬅️ Forwarding AGENT → WEB"); // Uncomment nếu muốn debug kỹ
                 clients.web.send(msg);
             }
             return;
         }
+    });
+
+    ws.on("error", (err) => {
+        console.error(`⚠️ Error on connection ${ip}:`, err.message);
     });
 
     ws.on("close", () => {

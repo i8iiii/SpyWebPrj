@@ -1,36 +1,450 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {}
+    "net8.0-windows7.0": {
+      "AForge/2.2.5": {
+        "type": "package",
+        "compile": {
+          "lib/AForge.dll": {}
+        },
+        "runtime": {
+          "lib/AForge.dll": {}
+        }
+      },
+      "BarcodeQRCodeSDK/2.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/BarcodeQRCodeSDK.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0/BarcodeQRCodeSDK.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libDynamLicenseClient.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libDynamicPdf.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libDynamsoftBarcodeReader.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libDynamsoftLicenseClient.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-x64/native/libDynamicPdf.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/osx-x64/native/libDynamsoftBarcodeReader.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/osx-x64/native/libDynamsoftLicenseClient.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-x64/native/DBRx64.lib": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/DynamicPdfx64.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/DynamsoftBarcodeReaderx64.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/DynamsoftLicClientx64.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/DynamsoftLicenseClientx64.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/vcomp110.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          }
+        }
+      },
+      "FlashCap/1.11.0": {
+        "type": "package",
+        "dependencies": {
+          "FlashCap.Core": "1.11.0"
+        },
+        "compile": {
+          "lib/net8.0/FlashCap.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/FlashCap.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "FlashCap.Core/1.11.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/FlashCap.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/FlashCap.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "OpenCvSharp4/4.11.0.20250507": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        },
+        "compile": {
+          "lib/net6.0/OpenCvSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/OpenCvSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "OpenCvSharp4.runtime.win/4.11.0.20250507": {
+        "type": "package",
+        "build": {
+          "build/net5.0/OpenCvSharp4.runtime.win.props": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-x64/native/OpenCvSharpExtern.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x64/native/opencv_videoio_ffmpeg4110_64.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/OpenCvSharpExtern.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          },
+          "runtimes/win-x86/native/opencv_videoio_ffmpeg4110.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "SharpAvi/3.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0-windows7.0/SharpAvi.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0-windows7.0/SharpAvi.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "System.Memory/4.6.3": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp2.1/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/_._": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "AForge/2.2.5": {
+      "sha512": "clkumhM9DggqIzEXAHgVLeWO4arG5YfoPr7J4jfjJx35AoeEIJSSm49J25bwp/9mXQYLwi7y1Wunc8qgYJsGxg==",
+      "type": "package",
+      "path": "aforge/2.2.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aforge.2.2.5.nupkg.sha512",
+        "aforge.nuspec",
+        "lib/AForge.dll",
+        "lib/AForge.xml"
+      ]
+    },
+    "BarcodeQRCodeSDK/2.4.0": {
+      "sha512": "0JAsiRIvVW3r7vKr37f0roUxkUeRr9UTqOwtlAEHvxx+p9xM9ZeIvPWhprzX3OyjmUKP8MhNYDW1Ou41NOdvrA==",
+      "type": "package",
+      "path": "barcodeqrcodesdk/2.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "barcodeqrcodesdk.2.4.0.nupkg.sha512",
+        "barcodeqrcodesdk.nuspec",
+        "build/native/BarcodeQRCodeSDK.targets",
+        "build/native/include/DynamsoftBarcodeReader.h",
+        "build/native/include/DynamsoftCommon.h",
+        "docs/README.md",
+        "lib/net7.0-android31.0/BarcodeQRCodeSDK.dll",
+        "lib/net7.0-android31.0/BarcodeQRCodeSDK.pdb",
+        "lib/net7.0-android31.0/BarcodeQRCodeSDK.xml",
+        "lib/net7.0-android31.0/DynamsoftBarcodeReader.aar",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.dll",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/Info.plist",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64/DynamsoftBarcodeReader.framework/DynamsoftBarcodeReader",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64/DynamsoftBarcodeReader.framework/Headers/DynamsoftBarcodeReader.h",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64/DynamsoftBarcodeReader.framework/Headers/DynamsoftBarcodeSDK.h",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64/DynamsoftBarcodeReader.framework/Info.plist",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64/DynamsoftBarcodeReader.framework/Modules/module.modulemap",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64_x86_64-simulator/DynamsoftBarcodeReader.framework/DynamsoftBarcodeReader",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64_x86_64-simulator/DynamsoftBarcodeReader.framework/Headers/DynamsoftBarcodeReader.h",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64_x86_64-simulator/DynamsoftBarcodeReader.framework/Headers/DynamsoftBarcodeSDK.h",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64_x86_64-simulator/DynamsoftBarcodeReader.framework/Info.plist",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64_x86_64-simulator/DynamsoftBarcodeReader.framework/Modules/module.modulemap",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/DynamsoftBarcodeReader.xcframework/ios-arm64_x86_64-simulator/DynamsoftBarcodeReader.framework/_CodeSignature/CodeResources",
+        "lib/net7.0-ios16.1/BarcodeQRCodeSDK.resources/manifest",
+        "lib/net7.0/BarcodeQRCodeSDK.dll",
+        "runtimes/linux-x64/native/libDynamLicenseClient.so",
+        "runtimes/linux-x64/native/libDynamicPdf.so",
+        "runtimes/linux-x64/native/libDynamsoftBarcodeReader.so",
+        "runtimes/linux-x64/native/libDynamsoftLicenseClient.so",
+        "runtimes/osx-x64/native/libDynamicPdf.dylib",
+        "runtimes/osx-x64/native/libDynamsoftBarcodeReader.dylib",
+        "runtimes/osx-x64/native/libDynamsoftLicenseClient.dylib",
+        "runtimes/win-x64/native/DBRx64.lib",
+        "runtimes/win-x64/native/DynamicPdfx64.dll",
+        "runtimes/win-x64/native/DynamsoftBarcodeReaderx64.dll",
+        "runtimes/win-x64/native/DynamsoftLicClientx64.dll",
+        "runtimes/win-x64/native/DynamsoftLicenseClientx64.dll",
+        "runtimes/win-x64/native/vcomp110.dll"
+      ]
+    },
+    "FlashCap/1.11.0": {
+      "sha512": "XwH9DHLKGUTciHat2D7GgsUegAOErJAyZHX+3H5gHX70Ipds7Zv2/q3T9/f0KkIh2A5P6WCg+lFwVxMgLERCKA==",
+      "type": "package",
+      "path": "flashcap/1.11.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "FlashCap.100.png",
+        "flashcap.1.11.0.nupkg.sha512",
+        "flashcap.nuspec",
+        "lib/net35/FlashCap.dll",
+        "lib/net35/FlashCap.xml",
+        "lib/net40/FlashCap.dll",
+        "lib/net40/FlashCap.xml",
+        "lib/net45/FlashCap.dll",
+        "lib/net45/FlashCap.xml",
+        "lib/net461/FlashCap.dll",
+        "lib/net461/FlashCap.xml",
+        "lib/net48/FlashCap.dll",
+        "lib/net48/FlashCap.xml",
+        "lib/net5.0/FlashCap.dll",
+        "lib/net5.0/FlashCap.xml",
+        "lib/net6.0/FlashCap.dll",
+        "lib/net6.0/FlashCap.xml",
+        "lib/net7.0/FlashCap.dll",
+        "lib/net7.0/FlashCap.xml",
+        "lib/net8.0/FlashCap.dll",
+        "lib/net8.0/FlashCap.xml",
+        "lib/net9.0/FlashCap.dll",
+        "lib/net9.0/FlashCap.xml",
+        "lib/netcoreapp2.0/FlashCap.dll",
+        "lib/netcoreapp2.0/FlashCap.xml",
+        "lib/netcoreapp2.1/FlashCap.dll",
+        "lib/netcoreapp2.1/FlashCap.xml",
+        "lib/netcoreapp2.2/FlashCap.dll",
+        "lib/netcoreapp2.2/FlashCap.xml",
+        "lib/netcoreapp3.0/FlashCap.dll",
+        "lib/netcoreapp3.0/FlashCap.xml",
+        "lib/netcoreapp3.1/FlashCap.dll",
+        "lib/netcoreapp3.1/FlashCap.xml",
+        "lib/netstandard1.3/FlashCap.dll",
+        "lib/netstandard1.3/FlashCap.xml",
+        "lib/netstandard2.0/FlashCap.dll",
+        "lib/netstandard2.0/FlashCap.xml",
+        "lib/netstandard2.1/FlashCap.dll",
+        "lib/netstandard2.1/FlashCap.xml"
+      ]
+    },
+    "FlashCap.Core/1.11.0": {
+      "sha512": "vEEUwQmpITV2iBgRU+YYl+Dr+Tm/1T/nXfnSLyLQSbBIWMlF/NO22OqU4ysfSNEb9TN6w+QK0bqGFMmnN13+Ag==",
+      "type": "package",
+      "path": "flashcap.core/1.11.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "FlashCap.100.png",
+        "flashcap.core.1.11.0.nupkg.sha512",
+        "flashcap.core.nuspec",
+        "lib/net35/FlashCap.Core.dll",
+        "lib/net35/FlashCap.Core.xml",
+        "lib/net40/FlashCap.Core.dll",
+        "lib/net40/FlashCap.Core.xml",
+        "lib/net45/FlashCap.Core.dll",
+        "lib/net45/FlashCap.Core.xml",
+        "lib/net461/FlashCap.Core.dll",
+        "lib/net461/FlashCap.Core.xml",
+        "lib/net48/FlashCap.Core.dll",
+        "lib/net48/FlashCap.Core.xml",
+        "lib/net5.0/FlashCap.Core.dll",
+        "lib/net5.0/FlashCap.Core.xml",
+        "lib/net6.0/FlashCap.Core.dll",
+        "lib/net6.0/FlashCap.Core.xml",
+        "lib/net7.0/FlashCap.Core.dll",
+        "lib/net7.0/FlashCap.Core.xml",
+        "lib/net8.0/FlashCap.Core.dll",
+        "lib/net8.0/FlashCap.Core.xml",
+        "lib/net9.0/FlashCap.Core.dll",
+        "lib/net9.0/FlashCap.Core.xml",
+        "lib/netcoreapp2.0/FlashCap.Core.dll",
+        "lib/netcoreapp2.0/FlashCap.Core.xml",
+        "lib/netcoreapp2.1/FlashCap.Core.dll",
+        "lib/netcoreapp2.1/FlashCap.Core.xml",
+        "lib/netcoreapp2.2/FlashCap.Core.dll",
+        "lib/netcoreapp2.2/FlashCap.Core.xml",
+        "lib/netcoreapp3.0/FlashCap.Core.dll",
+        "lib/netcoreapp3.0/FlashCap.Core.xml",
+        "lib/netcoreapp3.1/FlashCap.Core.dll",
+        "lib/netcoreapp3.1/FlashCap.Core.xml",
+        "lib/netstandard1.3/FlashCap.Core.dll",
+        "lib/netstandard1.3/FlashCap.Core.xml",
+        "lib/netstandard2.0/FlashCap.Core.dll",
+        "lib/netstandard2.0/FlashCap.Core.xml",
+        "lib/netstandard2.1/FlashCap.Core.dll",
+        "lib/netstandard2.1/FlashCap.Core.xml"
+      ]
+    },
+    "OpenCvSharp4/4.11.0.20250507": {
+      "sha512": "j/R+G6xGC5IV2wGRU0/GF5qG/FrP+Uxp8dmNnXFlIdiw8Gfo4mtvKcBOBfS/bn4pP/7FNHLFX/xvMtgPJeDjAA==",
+      "type": "package",
+      "path": "opencvsharp4/4.11.0.20250507",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net48/OpenCvSharp.dll",
+        "lib/net48/OpenCvSharp.xml",
+        "lib/net6.0/OpenCvSharp.dll",
+        "lib/net6.0/OpenCvSharp.xml",
+        "lib/netstandard2.0/OpenCvSharp.dll",
+        "lib/netstandard2.0/OpenCvSharp.xml",
+        "lib/netstandard2.1/OpenCvSharp.dll",
+        "lib/netstandard2.1/OpenCvSharp.xml",
+        "opencvsharp4.4.11.0.20250507.nupkg.sha512",
+        "opencvsharp4.nuspec"
+      ]
+    },
+    "OpenCvSharp4.runtime.win/4.11.0.20250507": {
+      "sha512": "3PxMXyzR+pkL9UOx2PiBjZm+/iyCIu5D6OlA1sq9MH7oWrfvVnCXJlUYhIJv67F7SLUwUuGwXDIQBfdsL/54lg==",
+      "type": "package",
+      "path": "opencvsharp4.runtime.win/4.11.0.20250507",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net48/OpenCvSharp4.runtime.win.props",
+        "build/net5.0/OpenCvSharp4.runtime.win.props",
+        "build/netcoreapp/OpenCvSharp4.runtime.win.props",
+        "build/netstandard/OpenCvSharp4.runtime.win.props",
+        "opencvsharp4.runtime.win.4.11.0.20250507.nupkg.sha512",
+        "opencvsharp4.runtime.win.nuspec",
+        "runtimes/win-x64/native/OpenCvSharpExtern.dll",
+        "runtimes/win-x64/native/opencv_videoio_ffmpeg4110_64.dll",
+        "runtimes/win-x86/native/OpenCvSharpExtern.dll",
+        "runtimes/win-x86/native/opencv_videoio_ffmpeg4110.dll"
+      ]
+    },
+    "SharpAvi/3.0.1": {
+      "sha512": "5JZVlAlrY8cirElTpMHdUjTI5xNeaGY8bhS3e9o9zQZsqgeFON+wVmRDiFqJSZDM2ympv7hpXtVywHyzBvaK8w==",
+      "type": "package",
+      "path": "sharpavi/3.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/SharpAvi.dll",
+        "lib/net45/SharpAvi.xml",
+        "lib/net5.0-windows7.0/SharpAvi.dll",
+        "lib/net5.0-windows7.0/SharpAvi.xml",
+        "lib/net5.0/SharpAvi.dll",
+        "lib/net5.0/SharpAvi.xml",
+        "lib/netstandard2.0/SharpAvi.dll",
+        "lib/netstandard2.0/SharpAvi.xml",
+        "readme.md",
+        "sharpavi.3.0.1.nupkg.sha512",
+        "sharpavi.nuspec"
+      ]
+    },
+    "System.Memory/4.6.3": {
+      "sha512": "qdcDOgnFZY40+Q9876JUHnlHu7bosOHX8XISRoH94fwk6hgaeQGSgfZd8srWRZNt5bV9ZW2TljcegDNxsf+96A==",
+      "type": "package",
+      "path": "system.memory/4.6.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "buildTransitive/net461/System.Memory.targets",
+        "buildTransitive/net462/_._",
+        "lib/net462/System.Memory.dll",
+        "lib/net462/System.Memory.xml",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "lib/netstandard2.1/_._",
+        "system.memory.4.6.3.nupkg.sha512",
+        "system.memory.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": []
+    "net8.0-windows7.0": [
+      "AForge >= 2.2.5",
+      "BarcodeQRCodeSDK >= 2.4.0",
+      "FlashCap >= 1.11.0",
+      "OpenCvSharp4 >= 4.11.0.20250507",
+      "OpenCvSharp4.runtime.win >= 4.11.0.20250507",
+      "SharpAvi >= 3.0.1"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\HP\\.nuget\\packages\\": {},
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\OneDrive - VNU-HCMUS\\GITHUB\\SpyWebPrj\\server\\server.csproj",
+      "projectUniqueName": "C:\\Users\\Nguyen Thanh Dat\\Documents\\Project Socket Python Spyware\\SpyWebPrj\\server\\server.csproj",
       "projectName": "server",
-      "projectPath": "C:\\Users\\HP\\OneDrive - VNU-HCMUS\\GITHUB\\SpyWebPrj\\server\\server.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\OneDrive - VNU-HCMUS\\GITHUB\\SpyWebPrj\\server\\obj\\",
+      "projectPath": "C:\\Users\\Nguyen Thanh Dat\\Documents\\Project Socket Python Spyware\\SpyWebPrj\\server\\server.csproj",
+      "packagesPath": "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nguyen Thanh Dat\\Documents\\Project Socket Python Spyware\\SpyWebPrj\\server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+        "C:\\Users\\Nguyen Thanh Dat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -48,11 +462,38 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
         "targetAlias": "net8.0-windows",
+        "dependencies": {
+          "AForge": {
+            "target": "Package",
+            "version": "[2.2.5, )"
+          },
+          "BarcodeQRCodeSDK": {
+            "target": "Package",
+            "version": "[2.4.0, )"
+          },
+          "FlashCap": {
+            "target": "Package",
+            "version": "[1.11.0, )"
+          },
+          "OpenCvSharp4": {
+            "target": "Package",
+            "version": "[4.11.0.20250507, )"
+          },
+          "OpenCvSharp4.runtime.win": {
+            "target": "Package",
+            "version": "[4.11.0.20250507, )"
+          },
+          "SharpAvi": {
+            "target": "Package",
+            "version": "[3.0.1, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -72,8 +513,20 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AForge 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "AForge",
+      "targetGraphs": [
+        "net8.0-windows7.0"
+      ]
+    }
+  ]
 }

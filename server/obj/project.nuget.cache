@@ -1,8 +1,30 @@
 {
   "version": 2,
-  "dgSpecHash": "6ie+PTwq0BM=",
+  "dgSpecHash": "UQWZCx+v/HA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\OneDrive - VNU-HCMUS\\GITHUB\\SpyWebPrj\\server\\server.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "projectFilePath": "C:\\Users\\Nguyen Thanh Dat\\Documents\\Project Socket Python Spyware\\SpyWebPrj\\server\\server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\aforge\\2.2.5\\aforge.2.2.5.nupkg.sha512",
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\barcodeqrcodesdk\\2.4.0\\barcodeqrcodesdk.2.4.0.nupkg.sha512",
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\flashcap\\1.11.0\\flashcap.1.11.0.nupkg.sha512",
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\flashcap.core\\1.11.0\\flashcap.core.1.11.0.nupkg.sha512",
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\opencvsharp4\\4.11.0.20250507\\opencvsharp4.4.11.0.20250507.nupkg.sha512",
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\opencvsharp4.runtime.win\\4.11.0.20250507\\opencvsharp4.runtime.win.4.11.0.20250507.nupkg.sha512",
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\sharpavi\\3.0.1\\sharpavi.3.0.1.nupkg.sha512",
+    "C:\\Users\\Nguyen Thanh Dat\\.nuget\\packages\\system.memory\\4.6.3\\system.memory.4.6.3.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'AForge 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
+      "projectPath": "C:\\Users\\Nguyen Thanh Dat\\Documents\\Project Socket Python Spyware\\SpyWebPrj\\server\\server.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Nguyen Thanh Dat\\Documents\\Project Socket Python Spyware\\SpyWebPrj\\server\\server.csproj",
+      "libraryId": "AForge",
+      "targetGraphs": [
+        "net8.0-windows7.0"
+      ]
+    }
+  ]
 }
