@@ -35,7 +35,7 @@
       </div>
 
       <div class="status">
-        Trạng thái:<span id="statusText">Chưa kết nối</span>
+        Trạng thái:<span id="statusText"> Chưa kết nối</span>
       </div>
 
       <div class="log" id="logBox"> <!-- Javascript here --> </div>
@@ -102,11 +102,19 @@
 
       <div class="log-panel">
         <h2>Dữ liệu từ Agent</h2>
-        <div id="imageContainer">
-          <img id="monitorScreen">
-        </div>
-        <div class="log" id="adminLogBox">
-          <div>> Hệ thống sẵn sàng...</div>
+
+        <div class="log-panel" style="display: block;">
+          <div class="log" id="processLogBox">
+            <div> Processing... </div>
+          </div>
+
+          <div class="log" id="listAppLogBox">
+            <div> Listing apps... </div>
+          </div>
+
+          <div class="log" id="adminLogBox">
+            <div> Hệ thống sẵn sàng... </div>
+          </div>
         </div>
       </div>
     </div>

@@ -101,24 +101,30 @@ function toggleWebcam() {
 function toggleListAppPanel() {
     const panel = document.querySelector(".list-app-panel");
     const mainPanel = document.querySelector(".button-panel");
+    const listAppLogBox = document.getElementById("listAppLogBox");
     if (panel.style.display === "none" || panel.style.display === "") {
         panel.style.display = "flex";
         mainPanel.style.display = "none";
+        listAppLogBox.style.display = "block";
     } else {
         panel.style.display = "none";
         mainPanel.style.display = "block";
+        listAppLogBox.style.display = "none";
     }
 }
 
 function toggleListProcessPanel() {
     const mainPanel = document.querySelector(".button-panel");
     const panel = document.querySelector(".list-process-panel");
+    const processLogBox = document.getElementById("processLogBox");
     if (panel.style.display === "none" || panel.style.display === "") {
         panel.style.display = "flex";
         mainPanel.style.display = "none";
+        processLogBox.style.display = "block";
     } else {
         panel.style.display = "none";
         mainPanel.style.display = "block";
+        processLogBox.style.display = "none";
     }
 }
 
