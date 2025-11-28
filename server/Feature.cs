@@ -66,7 +66,7 @@ namespace WindowsAgent
                     case "REGISTERED_OK": return ""; 
                     case "CMD_PING": return "PONG: " + DateTime.Now.ToString("HH:mm:ss");
                     case "CMD_GET_PROCESS": return "LIST_PROC:" + GetRunningProcesses();
-                    case "CMD_GET_APPS": return "LIST_PROC:" + GetInstalledAppsWithPaths();
+                    case "CMD_GET_APPS": return "LIST_APP:" + GetInstalledAppsWithPaths();
                     case "CMD_SCREENSHOT": return "IMG_BASE64:" + TakeScreenshot();
                     case "CMD_SHUTDOWN": ShutdownComputer(); return "LOG: Tắt máy...";
                     case "CMD_RESTART": RestartComputer(); return "LOG: Khởi động lại...";
@@ -108,7 +108,7 @@ namespace WindowsAgent
 
             try {
                 // Cấu hình AVI Writer dùng MJPEG
-                _aviWriter = new AviWriter(_tempVideoFile) { FramesPerSecond = 10, EmitIndex1 = true };
+                _aviWriter = new AviWriter(_tempVideoFile) { FramesPerSecond = 24, EmitIndex1 = true };
                 _aviStream = _aviWriter.AddVideoStream();
                 _aviStream.Width = 640; _aviStream.Height = 480;
                 _aviStream.Codec = CodecIds.MotionJpeg; // Codec nén ảnh
@@ -231,9 +231,35 @@ namespace WindowsAgent
         }
 
         // Utils & App Management
-        private string StartAppByName(string appName) { try { Process.Start(appName); return $"LOG: Đã mở {appName}"; } catch (Exception e) { return "ERROR: " + e.Message; } }
-        private string KillProcessByPid(string pidStr) { try { Process.GetProcessById(int.Parse(pidStr)).Kill(); return $"LOG: Killed PID {pidStr}"; } catch { return "ERROR: Không tắt được."; } }
-        private string GetRunningProcesses() { StringBuilder s=new StringBuilder(); foreach(Process p in Process.GetProcesses()) try{s.AppendLine($"- {p.ProcessName} ({p.Id})");}catch{} return s.ToString(); }
+        private string StartAppByName(string appName) {
+            try {
+                Process? p = Process.Start(appName);
+
+                if (p != null) {
+                    return $"LOG: Đã mở {appName} - {p.ProcessName} ({p.Id})";
+                } else {
+                    return $"LOG: Đã mở {appName} (Không lấy được Process ID)";
+                }
+            } catch (Exception e) {
+                return "ERROR: " + e.Message;
+            }
+        }
+        private string KillProcessByPid(string pidStr) { 
+            try { 
+                Process.GetProcessById(int.Parse(pidStr)).Kill(); 
+                return $"LOG: Killed PID {pidStr}"; 
+            } catch { 
+                return "ERROR: Không tắt được."; 
+            } 
+        }
+        private string GetRunningProcesses() { 
+            StringBuilder s=new StringBuilder(); 
+            foreach(Process p in Process.GetProcesses()) 
+                try{s.AppendLine($"- {p.ProcessName} ({p.Id})");
+                } catch{
+                    
+                } return s.ToString(); 
+        }
         public string GetInstalledAppsWithPaths() {
             StringBuilder sb = new StringBuilder();
             var apps = new List<(string Name, string Path)>();

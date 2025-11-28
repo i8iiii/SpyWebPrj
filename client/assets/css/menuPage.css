@@ -17,7 +17,7 @@
   padding: 40px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   width: 100%;
-  box-sizing: border-box;
+  max-height: fit-content;
 }
 
 .list-app-panel,
@@ -62,9 +62,12 @@
   color: #94a3b8;
   border: 1px solid rgba(255, 255, 255, 0.05);
 
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   min-height: fit-content; 
-  max-height: 400px;
+  height: 100%;
+  max-height: fit-content;
+  word-wrap: break-word;
 }
 
 .log {
@@ -134,7 +137,7 @@ button:has(span[data-state="off"]) {
   background-color: #d2dbe7;
 }
 
-#app-id-input,
+#app-id-input,q
 #process-id-input {
   width: 90%;
   height: auto;

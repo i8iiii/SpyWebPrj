@@ -89,7 +89,7 @@ namespace WindowsAgent
                 _ = Task.Run(ListenLoop);
             }
             catch (Exception ex) {
-                UpdateLog("❌ Lỗi kết nối: " + ex.Message);
+                UpdateLog("❌ Lỗi kết nối: " + ex.Message, true);
                 openServerButton.Enabled = true;
             }
         }
@@ -122,8 +122,8 @@ namespace WindowsAgent
             this.Invoke(new Action(() => { openServerButton.Enabled = true; openServerButton.BackColor = Color.Red; }));
         }
 
-        private void UpdateLog(string msg) {
-            if (logBox.InvokeRequired) logBox.Invoke(new Action(() => logBox.AppendText(msg + "\r\n")));
+        private void UpdateLog(string msg, bool isAdminLog = false) {
+            if (logBox.InvokeRequired) logBox.Invoke(new Action(() => logBox.AppendText(msg + "\r\n")), isAdminLog.ToString());
             else logBox.AppendText(msg + "\r\n");
         }
 
