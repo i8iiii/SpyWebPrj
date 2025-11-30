@@ -17,7 +17,7 @@
   padding: 40px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   width: 100%;
-  max-height: fit-content;
+  max-height: 70vh;
 }
 
 .list-app-panel,
@@ -62,12 +62,9 @@
   color: #94a3b8;
   border: 1px solid rgba(255, 255, 255, 0.05);
 
-  overflow-y: auto;
-  overflow-x: hidden;
-  min-height: fit-content; 
-  height: 100%;
-  max-height: fit-content;
-  word-wrap: break-word;
+  overflow-y: scroll;
+  max-height: 60vh;
+  min-height: auto;
 }
 
 .log {
@@ -153,4 +150,9 @@ button:has(span[data-state="off"]) {
 #processLogBox,
 #listAppLogBox {
   display: none;
+}
+
+#logBoxAfterConnected {
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
