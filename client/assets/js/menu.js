@@ -106,6 +106,8 @@ function toggleListAppPanel() {
         panel.style.display = "flex";
         mainPanel.style.display = "none";
         listAppLogBox.style.display = "block";
+        document.getElementById("listAppLogBox").innerHTML = "Loading..."; 
+        document.getElementById("listAppLogBox").style.display = "block";
     } else {
         panel.style.display = "none";
         mainPanel.style.display = "block";
@@ -121,6 +123,8 @@ function toggleListProcessPanel() {
         panel.style.display = "flex";
         mainPanel.style.display = "none";
         processLogBox.style.display = "block";
+        document.getElementById("processLogBox").innerHTML = "Loading..."; 
+        document.getElementById("processLogBox").style.display = "block";
     } else {
         panel.style.display = "none";
         mainPanel.style.display = "block";
